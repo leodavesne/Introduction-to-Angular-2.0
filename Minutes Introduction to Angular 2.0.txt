@@ -1,3 +1,29 @@
 160803________________________
 https://mva.microsoft.com/en-US/training-courses/introduction-to-angular-20-16540
 MVC structure, framework, single page applications, client side templating, testing
+au lieu de faire faire au serveur tout le travail de création de la page, faire travailler le browser de l'utilisateur pour récupérer de la donnée "pure" (JSON par exemple) et lui faire rendre visuellement la page
+on partage mieux le travail et qui plus est, le serveur devient un fournisseur d'API qui peut être facilement utilisé par une application mobile par exemple
+reload only some specific parts of a web page
+separate the HTML manipulation and logic, separate the server and the web page
+differences between Angular 1 and 2:
+1. Angular 1: structured MVC framework, separation of HTML and logic, client side templating
+2. Angular 2: component based UI, more modular design, TypeScript, backwards compatible, faster
+Reasons to consider or reconsider:
+* Large/small projects
+* Large/small development teams
+* Opinionated framework
+* Complex/simple
+* Single page/multi-page application
+opinionated = qui a des avis très arrêtés, aux idées arrêtées
+If a framework is opinionated, it lock or guides you into their way of doing things: http://stackoverflow.com/questions/802050/what-is-opinionated-software
+TypeScript: superset of JavaScript
+* Strongly typed
+* Modules and classes
+* Template strings
+* Interfaces
+* Generics
+any can be changed from number to string anytime we want with TypeScript
+you can write JavaScript as usual in your TypeScript code
+on the website of TypeScript, there is a playground to try the language and see the generated JavaScript code: https://www.typescriptlang.org/play/index.html
+the type of variables is optional in TypeScript
+no parenthesis for classes with TypeScript
