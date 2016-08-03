@@ -27,3 +27,19 @@ you can write JavaScript as usual in your TypeScript code
 on the website of TypeScript, there is a playground to try the language and see the generated JavaScript code: https://www.typescriptlang.org/play/index.html
 the type of variables is optional in TypeScript
 no parenthesis for classes with TypeScript
+3 blocks in Angular2: directives, data flow and providers
+Directives:
+* Component: templates (HTML), styles (CSS) & logic (JavaScript)
+* Attribute: styling HTML
+* Structural: manipulating HTML
+Data flow:
+* Interpolation: variable printing in templates
+* Event binding: trigger events
+* 2-way binding: variables updated in real time
+Providers:
+* Services
+	* Reusable logic
+	* Data storing and manipulation
+* Libraries
+Component directives: "reusable building blocks for an application"
+Components have HTML (template), CSS (styles) and JavaScript (classes)
