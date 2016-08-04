@@ -53,3 +53,19 @@ l'arborescence de base avant l'installation :
 * systemjs.config.js
 * tsconfig.json
 * typings.json
+Attribute directives: styling elements, "can change the appearance or behavior of an element"
+[class.red]="true"
+[ngClass]="{ red: true, box: true }"
+[ngStyle]="{ background-color: blue, color: black }"
+[customOnHoverHighlight]
+the best practice is, as usual, always using classes and not specific styling (so no ngStyle de préférence)
+Structural directives: "can change the appearance or behavior of an element"
+*ngIf="imTrue"
+*ngFor="let task of tasks" (même syntaxe que pour TypeScript)
+Data flow: interpolation, so putting a JavaScript variable value in the HTML template
+{{ myNumber }}
+Data flow: event binding
+click, hover, mouseenter, mouseleave, etc. (built-in events in HTML)
+(click)="doThis()"
+Data flow: 2 way binding
+ngModel

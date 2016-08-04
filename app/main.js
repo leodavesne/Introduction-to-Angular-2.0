@@ -12,12 +12,22 @@ var platform_browser_dynamic_1 = require('@angular/platform-browser-dynamic');
 var core_1 = require('@angular/core');
 var TasksComponent = (function () {
     function TasksComponent() {
+        this.toggle2 = true;
+        this.people = ["Person1", "Person2", "Person3"];
+        this.num = 7;
+        this.num2 = [7, 12, 14];
+        this.toggle = false;
+        this.sample = "";
     }
     TasksComponent.prototype.ngOnInit = function () { };
+    TasksComponent.prototype.onClick = function () {
+        alert("Button Clicked!");
+    };
     TasksComponent = __decorate([
         core_1.Component({
             selector: 'tasks',
-            template: "\n\t<h4>This is the Tasks Component</h4>\n\t"
+            template: "\n\t<h4 [class.red]=\"toggle\">This is the Tasks Component</h4>\n\t<h4 [ngClass]=\"{ red: toggle }\">This is the Tasks Component</h4>\n\t<h4 [ngClass]=\"{ red: toggle, blue: !toggle }\">This is the Tasks Component</h4>\n\t<h5 *ngIf=\"toggle2\">Hello World!</h5>\n\t<ul>\n\t\t<li *ngFor=\"let person of people\">\n\t\t\t{{ person }}\n\t\t</li>\n\t</ul>\n\t<span>{{num}}</span>\n\t<br />\n\t<span>{{num2 | json}}</span>\n\t<br />\n\t<button (click)=\"onClick()\">Click me!</button>\n\t<br />\n\t<button (mouseenter)=\"onClick()\">Click me!</button>\n\t<br />\n\t<input [(ngModel)]=\"sample\">\n\t<span>{{sample}}</span>\n\t",
+            styles: [".red { color: red }", ".blue { color: blue }"],
         }), 
         __metadata('design:paramtypes', [])
     ], TasksComponent);
