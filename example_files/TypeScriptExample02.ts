@@ -9,10 +9,10 @@ function sample(first: string): string {
 	return first;
 }
 
-class Person {
+class Vehicule {
 	constructor(public name: string) {
 
 	}
 }
 
-var aPerson: Person = new Person("PersonName");
+var aPerson: Person = new Person("Auto");

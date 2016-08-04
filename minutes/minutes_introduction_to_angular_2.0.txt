@@ -43,3 +43,13 @@ Providers:
 * Libraries
 Component directives: "reusable building blocks for an application"
 Components have HTML (template), CSS (styles) and JavaScript (classes)
+le quickstart pour Angular 2.0 : https://angular.io/docs/ts/latest/quickstart.html
+l'arborescence de base avant l'installation :
+* app
+	main.ts
+* index.html
+* package.json
+* styles.css
+* systemjs.config.js
+* tsconfig.json
+* typings.json
