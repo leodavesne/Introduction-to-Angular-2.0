@@ -1,8 +1,18 @@
 import { bootstrap }    from '@angular/platform-browser-dynamic';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injectable } from '@angular/core';
+
+@Injectable()
+export class TaskService {
+	tasks = ["First task", "Second task", "Third task"];
+
+	udpate() {
+		
+	}
+}
 
 @Component({
 	selector: 'tasks',
+	providers: [TaskService],
 	template: `
 	<h4 [class.red]="toggle">This is the Tasks Component</h4>
 	<h4 [ngClass]="{ red: toggle }">This is the Tasks Component</h4>
@@ -23,6 +33,13 @@ import { Component, OnInit } from '@angular/core';
 	<br />
 	<input [(ngModel)]="sample">
 	<span>{{sample}}</span>
+	<br />
+	{{ taskService.tasks | json }}
+	<ul>
+		<li *ngFor="let task of taskService.tasks">
+			{{ task }}
+		</li>
+	</ul>
 	`,
 	styles: [".red { color: red }", ".blue { color: blue }"],
 })
@@ -33,7 +50,7 @@ export class TasksComponent implements OnInit {
 	num: number = 7;
 	num2: Array<number> = [7, 12, 14];
 
-	constructor() { }
+	constructor(public taskService: TaskService) { }
 
 	toggle: boolean = false;
 

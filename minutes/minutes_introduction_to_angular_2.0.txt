@@ -69,3 +69,7 @@ click, hover, mouseenter, mouseleave, etc. (built-in events in HTML)
 (click)="doThis()"
 Data flow: 2 way binding
 ngModel
+Providers - services
+with dependency injection!
+SPA = Single Page Application
+Providers - routes
