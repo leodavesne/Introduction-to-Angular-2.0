@@ -75,3 +75,5 @@ SPA = Single Page Application
 Providers - routes
 {path:'/tasks', name: 'Tasks', component: TasksComponent, useAsDefault: true},
 Providers - observables
+Components in components (parent, child)
+Providers in components
