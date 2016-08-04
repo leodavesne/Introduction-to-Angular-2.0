@@ -1,5 +1,6 @@
 import { bootstrap }    from '@angular/platform-browser-dynamic';
 import { Component, OnInit, Injectable } from '@angular/core';
+import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router-deprecated';
 
 @Injectable()
 export class TaskService {
@@ -8,6 +9,18 @@ export class TaskService {
 	udpate() {
 		
 	}
+}
+
+@Component({
+	selector: 'other',
+	template: `
+	<h3>Other Component</h3>
+	`
+})
+export class OtherComponent implements OnInit {
+	constructor() { }
+
+	ngOnInit() { }
 }
 
 @Component({
@@ -65,12 +78,20 @@ export class TasksComponent implements OnInit {
 
 @Component({
 	selector: 'my-app',
-	directives: [TasksComponent],
+	directives: [ROUTER_DIRECTIVES, TasksComponent],
+	providers: [ROUTER_PROVIDERS],
 	template: `
 	<h1>Hello World!</h1>
-	<tasks></tasks>
+	<h4>Other stuff here...</h4>
+	<a href="" [routerLink]="['Tasks']">Tasks</a>
+	<a href="" [routerLink]="['Other']">Other</a>
+	<router-outlet></router-outlet>
 	`
 })
+@RouteConfig([
+	{path:'/tasks', name: 'Tasks', component: TasksComponent, useAsDefault: true},
+	{path:'/other', name: 'Other', component: OtherComponent, useAsDefault: false}
+])
 export class AppComponent implements OnInit {
 	constructor() { }
 

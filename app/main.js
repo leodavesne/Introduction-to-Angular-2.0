@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var platform_browser_dynamic_1 = require('@angular/platform-browser-dynamic');
 var core_1 = require('@angular/core');
+var router_deprecated_1 = require('@angular/router-deprecated');
 var TaskService = (function () {
     function TaskService() {
         this.tasks = ["First task", "Second task", "Third task"];
@@ -23,6 +24,20 @@ var TaskService = (function () {
     return TaskService;
 }());
 exports.TaskService = TaskService;
+var OtherComponent = (function () {
+    function OtherComponent() {
+    }
+    OtherComponent.prototype.ngOnInit = function () { };
+    OtherComponent = __decorate([
+        core_1.Component({
+            selector: 'other',
+            template: "\n\t<h3>Other Component</h3>\n\t"
+        }), 
+        __metadata('design:paramtypes', [])
+    ], OtherComponent);
+    return OtherComponent;
+}());
+exports.OtherComponent = OtherComponent;
 var TasksComponent = (function () {
     function TasksComponent(taskService) {
         this.taskService = taskService;
@@ -56,9 +71,14 @@ var AppComponent = (function () {
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
-            directives: [TasksComponent],
-            template: "\n\t<h1>Hello World!</h1>\n\t<tasks></tasks>\n\t"
-        }), 
+            directives: [router_deprecated_1.ROUTER_DIRECTIVES, TasksComponent],
+            providers: [router_deprecated_1.ROUTER_PROVIDERS],
+            template: "\n\t<h1>Hello World!</h1>\n\t<h4>Other stuff here...</h4>\n\t<a href=\"\" [routerLink]=\"['Tasks']\">Tasks</a>\n\t<a href=\"\" [routerLink]=\"['Other']\">Other</a>\n\t<router-outlet></router-outlet>\n\t"
+        }),
+        router_deprecated_1.RouteConfig([
+            { path: '/tasks', name: 'Tasks', component: TasksComponent, useAsDefault: true },
+            { path: '/other', name: 'Other', component: OtherComponent, useAsDefault: false }
+        ]), 
         __metadata('design:paramtypes', [])
     ], AppComponent);
     return AppComponent;
