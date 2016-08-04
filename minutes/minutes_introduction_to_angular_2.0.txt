@@ -73,3 +73,5 @@ Providers - services
 with dependency injection!
 SPA = Single Page Application
 Providers - routes
+{path:'/tasks', name: 'Tasks', component: TasksComponent, useAsDefault: true},
+Providers - observables

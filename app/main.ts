@@ -1,13 +1,31 @@
 import { bootstrap }    from '@angular/platform-browser-dynamic';
 import { Component, OnInit, Injectable } from '@angular/core';
 import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router-deprecated';
+import { HTTP_PROVIDERS, Http, Response } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class TaskService {
-	tasks = ["First task", "Second task", "Third task"];
+	/*tasks = ["First task", "Second task", "Third task"];
 
-	udpate() {
+	update() {
 		
+	}*/
+
+	tasks;
+
+	constructor(private _http: Http) {}
+
+	getTasks() {
+		//console.log("getting tasks");
+
+		var aPromise = this._http.get("/tasks.json")
+			.map((response: Response) => response.json().data)
+			.toPromise();
+
+		aPromise.then(tasksFromServer => this.tasks = tasksFromServer);
 	}
 }
 
@@ -50,7 +68,7 @@ export class OtherComponent implements OnInit {
 	{{ taskService.tasks | json }}
 	<ul>
 		<li *ngFor="let task of taskService.tasks">
-			{{ task }}
+			{{ task.title }}
 		</li>
 	</ul>
 	`,
@@ -67,7 +85,11 @@ export class TasksComponent implements OnInit {
 
 	toggle: boolean = false;
 
-	ngOnInit() { }
+	//ngOnInit() { }
+
+	ngOnInit() {
+		this.taskService.getTasks();
+	}
 
 	onClick() {
 		alert("Button Clicked!");
@@ -98,4 +120,4 @@ export class AppComponent implements OnInit {
 	ngOnInit() { }
 }
 
-bootstrap(AppComponent);
+bootstrap(AppComponent, [HTTP_PROVIDERS]);

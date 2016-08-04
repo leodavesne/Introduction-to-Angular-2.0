@@ -11,15 +11,24 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var platform_browser_dynamic_1 = require('@angular/platform-browser-dynamic');
 var core_1 = require('@angular/core');
 var router_deprecated_1 = require('@angular/router-deprecated');
+var http_1 = require('@angular/http');
+require('rxjs/add/operator/map');
+require('rxjs/add/operator/toPromise');
 var TaskService = (function () {
-    function TaskService() {
-        this.tasks = ["First task", "Second task", "Third task"];
+    function TaskService(_http) {
+        this._http = _http;
     }
-    TaskService.prototype.udpate = function () {
+    TaskService.prototype.getTasks = function () {
+        //console.log("getting tasks");
+        var _this = this;
+        var aPromise = this._http.get("/tasks.json")
+            .map(function (response) { return response.json().data; })
+            .toPromise();
+        aPromise.then(function (tasksFromServer) { return _this.tasks = tasksFromServer; });
     };
     TaskService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [http_1.Http])
     ], TaskService);
     return TaskService;
 }());
@@ -48,7 +57,10 @@ var TasksComponent = (function () {
         this.toggle = false;
         this.sample = "";
     }
-    TasksComponent.prototype.ngOnInit = function () { };
+    //ngOnInit() { }
+    TasksComponent.prototype.ngOnInit = function () {
+        this.taskService.getTasks();
+    };
     TasksComponent.prototype.onClick = function () {
         alert("Button Clicked!");
     };
@@ -56,7 +68,7 @@ var TasksComponent = (function () {
         core_1.Component({
             selector: 'tasks',
             providers: [TaskService],
-            template: "\n\t<h4 [class.red]=\"toggle\">This is the Tasks Component</h4>\n\t<h4 [ngClass]=\"{ red: toggle }\">This is the Tasks Component</h4>\n\t<h4 [ngClass]=\"{ red: toggle, blue: !toggle }\">This is the Tasks Component</h4>\n\t<h5 *ngIf=\"toggle2\">Hello World!</h5>\n\t<ul>\n\t\t<li *ngFor=\"let person of people\">\n\t\t\t{{ person }}\n\t\t</li>\n\t</ul>\n\t<span>{{num}}</span>\n\t<br />\n\t<span>{{num2 | json}}</span>\n\t<br />\n\t<button (click)=\"onClick()\">Click me!</button>\n\t<br />\n\t<button (mouseenter)=\"onClick()\">Click me!</button>\n\t<br />\n\t<input [(ngModel)]=\"sample\">\n\t<span>{{sample}}</span>\n\t<br />\n\t{{ taskService.tasks | json }}\n\t<ul>\n\t\t<li *ngFor=\"let task of taskService.tasks\">\n\t\t\t{{ task }}\n\t\t</li>\n\t</ul>\n\t",
+            template: "\n\t<h4 [class.red]=\"toggle\">This is the Tasks Component</h4>\n\t<h4 [ngClass]=\"{ red: toggle }\">This is the Tasks Component</h4>\n\t<h4 [ngClass]=\"{ red: toggle, blue: !toggle }\">This is the Tasks Component</h4>\n\t<h5 *ngIf=\"toggle2\">Hello World!</h5>\n\t<ul>\n\t\t<li *ngFor=\"let person of people\">\n\t\t\t{{ person }}\n\t\t</li>\n\t</ul>\n\t<span>{{num}}</span>\n\t<br />\n\t<span>{{num2 | json}}</span>\n\t<br />\n\t<button (click)=\"onClick()\">Click me!</button>\n\t<br />\n\t<button (mouseenter)=\"onClick()\">Click me!</button>\n\t<br />\n\t<input [(ngModel)]=\"sample\">\n\t<span>{{sample}}</span>\n\t<br />\n\t{{ taskService.tasks | json }}\n\t<ul>\n\t\t<li *ngFor=\"let task of taskService.tasks\">\n\t\t\t{{ task.title }}\n\t\t</li>\n\t</ul>\n\t",
             styles: [".red { color: red }", ".blue { color: blue }"],
         }), 
         __metadata('design:paramtypes', [TaskService])
@@ -84,5 +96,5 @@ var AppComponent = (function () {
     return AppComponent;
 }());
 exports.AppComponent = AppComponent;
-platform_browser_dynamic_1.bootstrap(AppComponent);
+platform_browser_dynamic_1.bootstrap(AppComponent, [http_1.HTTP_PROVIDERS]);
 //# sourceMappingURL=main.js.map
